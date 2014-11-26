@@ -18,7 +18,7 @@ Hi, I'm Johnny Wey.
 
 ## Outline
 ---
-* Benefits of Ratpack
+* What is Ratpack?
 * Project organization
 	* Lazybones
 * Persistance
@@ -29,4 +29,26 @@ Hi, I'm Johnny Wey.
 * Adding web stuff
 * Authentication / Authorization
 * Putting it all together
-  * UI
+  * UI?
+
+## Ratpack?
+---
+* Initially built to be a [Sinatra](http://www.sinatrarb.com) like framework for Groovy.
+	* Grails was to Rails as Ratpack was to Sinatra
+	* Taken over by Tim Berglund in November of 2011
+	* Taken over by Luke Daley in March of 2012
+* Luke completely re-wrote the framework to use Netty
+* High-performance, asynchronous API with a Groovy DSL on top of Java 8
+* Perfect for micro-services and full web applications alike
+* Active development community
+* Support for Spring applications with a Spring bridge
+
+## Project Organization
+---
+So, let's start with a brand new Ratpack application. For this, we'll use `lazybones` to create a template.
+
+
+
+
+
+
