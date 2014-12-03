@@ -17,12 +17,24 @@ apply plugin: 'groovy'
 repositories {
     jcenter()
     maven { url "https://repo.spring.io/repo" } // for springloaded
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" } // for Flipside
 }
 
 dependencies {
     // SpringLoaded enables runtime hot reloading.
     // It is not part of the app runtime and is not shipped in the distribution.
     springloaded "org.springframework:springloaded:1.2.1.RELEASE"
+
+    // Persistence
+    compile 'de.caluga:morphium:2.2.15'
+
+    // Password hashing
+    compile 'org.mindrot:jbcrypt:0.3m'
+
+    // Flipside
+    compile('com.johnnywey:flipside:0.1.14-SNAPSHOT') {
+        exclude module: 'groovy-all'
+    }
 
     // Default SLF4J binding.  Note that this is a blocking implementation.
     // See here for a non blocking appender http://logging.apache.org/log4j/2.x/manual/async.html
