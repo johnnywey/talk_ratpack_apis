@@ -2,12 +2,15 @@ package com.johnnywey.ratpackapi;
 
 import com.johnnywey.ratpackapi.client.MongoClientConfig;
 import com.johnnywey.ratpackapi.client.MongoClientConfigDevelopment;
+import com.johnnywey.ratpackapi.service.UserService;
 import de.caluga.morphium.Morphium;
+import ratpack.guice.Guice;
 import ratpack.handling.Handler;
+import ratpack.jackson.JacksonModule;
 import ratpack.launch.HandlerFactory;
 import ratpack.launch.LaunchConfig;
 
-import static ratpack.handling.Handlers.chain;
+import static ratpack.jackson.Jackson.json;
 
 public class RatpackApiHandler implements HandlerFactory {
 
@@ -21,7 +24,15 @@ public class RatpackApiHandler implements HandlerFactory {
         // Load sample data ...
         Bootstrap.loadSampleData(morphium);
 
-        Handler helloWorldHandler = new HelloWorldHandler();
-        return chain(launchConfig, (chain) -> chain.handler(helloWorldHandler));
+        UserService userService = new UserService(morphium);
+
+        Handler baseHandler = new BaseHandler();
+
+        return Guice.builder(launchConfig)
+                .bindings(bindingSpec -> bindingSpec.add(new JacksonModule()))
+                .build((chain) ->
+                        chain.prefix("api", (api) ->
+                                        api.get("user", context -> context.render(json(userService.findAll())))
+                        ).handler(baseHandler));
     }
 }

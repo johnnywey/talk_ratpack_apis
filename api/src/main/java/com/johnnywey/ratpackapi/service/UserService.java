@@ -7,10 +7,14 @@ import com.johnnywey.flipside.failable.Success;
 import com.johnnywey.ratpackapi.domain.User;
 import de.caluga.morphium.Morphium;
 import de.caluga.morphium.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class UserService {
+    private final Logger log = LoggerFactory.getLogger(UserService.class);
+
     private final Morphium morphium;
 
     public UserService(Morphium morphium) {
@@ -29,6 +33,13 @@ public class UserService {
      */
     public Failable<User> findUserByUserId(final String userId) {
         return findByFieldName("objectId", userId);
+    }
+
+    /**
+     * Get all users.
+     */
+    public List<User> findAll() {
+        return morphium.readAll(User.class);
     }
 
     /**

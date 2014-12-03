@@ -31,6 +31,9 @@ dependencies {
     // Password hashing
     compile 'org.mindrot:jbcrypt:0.3m'
 
+    // JSON
+    compile 'io.ratpack:ratpack-jackson:0.9.11'
+
     // Flipside
     compile('com.johnnywey:flipside:0.1.14-SNAPSHOT') {
         exclude module: 'groovy-all'
