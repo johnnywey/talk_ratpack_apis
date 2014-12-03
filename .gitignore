@@ -1,0 +1,33 @@
+######################
+# Gradle / generated #
+######################
+target
+build
+.gradle
+*.class
+
+#############
+# Junit tmp #
+#############
+junit*.properties
+
+############
+# IntelliJ #
+############
+.idea
+*.iml
+*.ipr
+*.iws
+bin
+out
+exportToHTML
+
+###########
+# General #
+###########
+.DS_Store
+out.*
+apicheck-results
+stacktrace.log
+.history
+*.ser
