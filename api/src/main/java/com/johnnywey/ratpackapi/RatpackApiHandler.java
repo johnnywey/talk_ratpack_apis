@@ -10,7 +10,7 @@ public class RatpackApiHandler implements HandlerFactory {
 
     @Override
     public Handler create(LaunchConfig launchConfig) throws Exception {
-        return chain(launchConfig, (chain) -> chain.handler(context -> context.render("Hello World!!"))
-        );
+        Handler helloWorldHandler = new HelloWorldHandler();
+        return chain(launchConfig, (chain) -> chain.handler(helloWorldHandler));
     }
 }
