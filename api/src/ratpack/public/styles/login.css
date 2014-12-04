@@ -1,0 +1,157 @@
+/* Responsive utils */
+/* Transitions */
+/* Animation mixins */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+
+  100% {
+    -o-transform: rotate(360deg);
+  }
+}
+
+@-ms-keyframes spin {
+  0% {
+    -ms-transform: rotate(0deg);
+  }
+
+  100% {
+    -ms-transform: rotate(360deg);
+  }
+}
+
+/* Positioning mixins */
+/* Modal dialog mixins */
+a {
+  text-decoration: none;
+  color: #288edf;
+}
+
+button {
+  cursor: pointer;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+input.ng-invalid {
+  border: 1px solid red;
+}
+
+input.ng-valid {
+  border: 1px solid green;
+}
+
+ul {
+  list-style: none;
+}
+
+button.delete {
+  background-color: #da2929;
+}
+
+@media only screen and (max-width: 479px) {
+  .company-logo {
+    background-position: top;
+  }
+}
+
+.login-fields {
+  margin: 20px 0;
+}
+@media only screen and (max-width: 479px) {
+  .login-fields {
+    float: none;
+    width: 100%;
+    border: none;
+    margin: 0;
+  }
+}
+
+#error {
+  max-height: 32px;
+  color: red;
+  text-align: center;
+  font-style: italic;
+}
+
+.login-box {
+  height: 228px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  margin: -114px 0 0 0;
+  background-color: #fbfbfb;
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  overflow: hidden;
+}
+@media only screen and (max-width: 479px) {
+  .login-box {
+    height: auto;
+    padding-bottom: 10px;
+  }
+}
+.login-box section {
+  max-width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+}
+.login-box label {
+  color: #444444;
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+.login-box button[type=submit] {
+  float: right;
+}
+
+.input-fields {
+  padding: 0 40px;
+}
+@media only screen and (max-width: 479px) {
+  .input-fields {
+    padding: 0;
+  }
+}
+.input-fields input[type=text],
+.input-fields input[type=password] {
+  width: 100%;
+}
+@media only screen and (max-width: 479px) {
+  .input-fields input[type=text],
+  .input-fields input[type=password] {
+    margin: 0;
+  }
+}
+.input-fields .controls {
+  vertical-align: middle;
+  margin: 20px 0;
+}

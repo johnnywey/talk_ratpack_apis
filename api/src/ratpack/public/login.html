@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Login to Webapp!</title>
+    <meta name="viewport" content="width=device-width">
+    <!-- build:css styles/login.css -->
+    <link rel="stylesheet" href="styles/topcoat.css">
+    <link rel="stylesheet" href="styles/login.css">
+    <!-- endbuild -->
+</head>
+<body>
+<div class="container">
+    <div class="login-box">
+        <section>
+            <div class="login-fields">
+                <div id="error"></div>
+                <form method="post" action="/login">
+                    <div class="input-fields">
+                        <label for="username">
+                            Username
+                        </label>
+                        <input name="username" id="username" type="text" placeholder="user@domain.com" autofocus
+                               autocomplete="on" class="topcoat-text-input" maxlength="30">
+                        <label for="password">
+                            Password
+                        </label>
+                        <input name="password" id="password" type="password" placeholder="Password"
+                               class="topcoat-text-input" maxlength="30">
+                        <div class="controls">
+                            <button type="submit" class="topcoat-button--cta">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
+<script type="text/javascript">
+    if (window.location.search.toLowerCase().indexOf('error') > 0) {
+        document.getElementById('error').innerHTML = 'Invalid username or password.';
+    }
+</script>
+</body>
+</html>
