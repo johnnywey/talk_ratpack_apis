@@ -9,19 +9,40 @@ buildscript {
     }
 }
 
+if (!JavaVersion.current().java8Compatible) {
+    throw new IllegalStateException("Must be built with Java 8 or higher")
+}
+
 apply plugin: 'io.ratpack.ratpack-java'
 apply plugin: 'com.bluepapa32.watch'
 apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'jacoco'
 
 repositories {
     jcenter()
     maven { url "https://repo.spring.io/repo" } // for springloaded
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" } // for Flipside
 }
 
 dependencies {
     // SpringLoaded enables runtime hot reloading.
     // It is not part of the app runtime and is not shipped in the distribution.
     springloaded "org.springframework:springloaded:1.2.1.RELEASE"
+
+    // Persistence
+    compile 'de.caluga:morphium:2.2.15'
+
+    // Password hashing
+    compile 'org.mindrot:jbcrypt:0.3m'
+
+    // JSON
+    compile 'io.ratpack:ratpack-jackson:0.9.11'
+
+    // Flipside
+    compile('com.johnnywey:flipside:0.1.14-SNAPSHOT') {
+        exclude module: 'groovy-all'
+    }
 
     // Default SLF4J binding.  Note that this is a blocking implementation.
     // See here for a non blocking appender http://logging.apache.org/log4j/2.x/manual/async.html
@@ -46,6 +67,54 @@ task watchThread() << {
 run.mustRunAfter watchThread
 
 task dev(dependsOn: [watchThread, run])
+
+test {
+    String testType = System.properties['test.type']
+    if (testType == 'integration') {
+        include '**/*IntegrationTest.*'
+        include '**/*IntegrationSpec.*'
+    } else if (testType == 'unit') {
+        include '**/*Test.*'
+        include '**/*Spec.*'
+        exclude '**/*IntegrationTest.*'
+        exclude '**/*IntegrationSpec.*'
+    } else if (testType == 'all') {
+        include '**/*Test.*'
+        include '**/*Spec.*'
+    } else {
+        //Default to unit
+        include '**/*Test.*'
+        include '**/*Spec.*'
+        exclude '**/*IntegrationTest.*'
+        exclude '**/*IntegrationSpec.*'
+    }
+
+    // Prints results of test inline
+    afterSuite { desc, result ->
+        // Don't report on modules with no test suites
+        if (!desc.className) {
+            return
+        }
+
+        String testStatus
+        if (System.properties['nocolor']) {
+            testStatus = result.resultType
+        } else if (result.resultType != org.gradle.api.tasks.testing.TestResult.ResultType.SUCCESS) {
+            // Print in red if failed
+            testStatus = "\033[31m${result.resultType}\033[0m"
+        } else {
+            // Print in green if success/skipped
+            testStatus = "\033[32m${result.resultType}\033[0m"
+        }
+        println "Test suite ${desc.name}: ${testStatus}"
+    }
+}
+
+jacoco {
+    toolVersion = "0.7.2.201409121644"
+}
+
+task cover(dependsOn: [test, jacocoTestReport])
 
 idea {
     project {
