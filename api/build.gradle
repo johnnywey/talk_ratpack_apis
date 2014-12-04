@@ -9,10 +9,15 @@ buildscript {
     }
 }
 
+if (!JavaVersion.current().java8Compatible) {
+    throw new IllegalStateException("Must be built with Java 8 or higher")
+}
+
 apply plugin: 'io.ratpack.ratpack-java'
 apply plugin: 'com.bluepapa32.watch'
 apply plugin: 'idea'
 apply plugin: 'groovy'
+apply plugin: 'jacoco'
 
 repositories {
     jcenter()
@@ -104,6 +109,12 @@ test {
         println "Test suite ${desc.name}: ${testStatus}"
     }
 }
+
+jacoco {
+    toolVersion = "0.7.2.201409121644"
+}
+
+task cover(dependsOn: [test, jacocoTestReport])
 
 idea {
     project {
