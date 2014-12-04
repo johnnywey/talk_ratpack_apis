@@ -23,7 +23,7 @@ Hi, I'm Johnny Wey.
 * Spring Loaded
 * Switch to Java (remove ratpack.groovy)
 * Testing
-* Persistance
+* Persistence
 * JSON
 * Authentication
 * Code coverage
